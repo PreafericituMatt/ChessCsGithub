@@ -41,8 +41,8 @@ namespace Chess
         
         // Get relative horizontal or virtical movement coordinates, king , queen , pawn , rook
        
-        // distance = How far in the given direction
-        // direction = Direction relative to player
+        // distance = how far in the given direction
+        // direction = direction relative to player
         // Returns an array for horizontal or vertical movement
         public static Point[] GetMovementArray(int distance, Direction direction)
         {

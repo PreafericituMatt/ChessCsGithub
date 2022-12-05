@@ -1,4 +1,9 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Chess
 {
     class Bishop : ChessPiece
@@ -9,7 +14,7 @@ namespace Chess
         }
         public Bishop(int player)
         {
-            base.Player = player;
+            Player = player;
             CalculateMoves();
         }
 

@@ -52,16 +52,7 @@ namespace Chess
             return this;
         }
 
-        /// <summary>
-        /// Calculate the actual actions available for a Chess Piece at a set of coordinates.
-        /// </summary>
-        /// <param name="x">The number of squares right of the bottom left square</param>
-        /// <param name="y">The number of squares above the bottom left square</param>
-        /// <param name="ignoreCheck">Do not check for threats to the king</param>
-        /// <param name="attackActions">Calculate attacks</param>
-        /// <param name="moveActions">Calculate movement</param>
-        /// <param name="boardArray">An optional substitute board</param>
-        /// <returns>A list of points that can be moved to</returns>
+        //Calculate the actual actions available for a Chess Piece at a set of coordinates.
         public IEnumerable<Point> PieceActions(int x, int y, bool ignoreCheck = false, bool attackActions = true, bool moveActions = true, ChessPiece[,] boardArray = null)
         {
             if (boardArray == null)
@@ -193,25 +184,14 @@ namespace Chess
             return PieceActions(position.x, position.y, ignoreCheck, attackActions, moveActions, boardArray);
         }
 
-        /// <summary>
-        /// Move a peice from one location on the board to another.
-        /// </summary>
-        /// <param name="fromX">The x coordinate of the piece that is moving.</param>
-        /// <param name="fromY">The y coordinate of the piece that is moving.</param>
-        /// <param name="toX">The x coordinate of the destination.</param>
-        /// <param name="toY">The y coordinate of the destination.</param>
-        /// <returns>Returns true on success or false on failure.</returns>
+       
+        //Move a peice from one location on the board to another.
+        
         public bool ActionPiece(int fromX, int fromY, int toX, int toY)
         {
             return ActionPiece(new Point(fromX, fromY), new Point(toX, toY));
         }
-
-        /// <summary>
-        /// Move a peice from one location on the board to another.
-        /// </summary>
-        /// <param name="from">The location of the piece that is moving.</param>
-        /// <param name="to">The location to move to.</param>
-        /// <returns>Returns true on success or false on failure.</returns>
+        
         public bool ActionPiece(Point from, Point to, bool bypassValidaiton = false)
         {
             if (bypassValidaiton || PieceActions(from).Contains(to))
@@ -242,7 +222,7 @@ namespace Chess
                                 ((Pawn)boardArray[adjasentX, to.y]).CanEnPassantLeft = true;
                         }
                     }
-                    // If this was a sideways jump to null, it was enpassant!
+                    // If this was a sideways jump to null, it was enpassant
                     if (from.x != to.x && boardArray[to.x, to.y] == null)
                     {
                         boardArray[to.x, from.y] = null;
@@ -279,12 +259,8 @@ namespace Chess
             return false;
         }
 
-        /// <summary>
-        /// Find out if a square is vulnerable to attacks by another player.
-        /// </summary>
-        /// <param name="player">The vulnerable player</param>
-        /// <param name="boardArray">An optional substitute board for validating moves</param>
-        /// <returns>True if square can be attacked</returns>
+    
+        // Find out if a square is vulnerable to attacks by another player.
         public bool CheckSquareVulnerable(int squareX, int squareY, int player, ChessPiece[,] boardArray = null)
         {
             if (boardArray == null)

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Chess
 {
     public class Knight : ChessPiece
@@ -14,7 +9,7 @@ namespace Chess
         }
         public Knight(int player)
         {
-            base.Player = player;
+            Player = player;
             CalculateMoves();
         }
 

@@ -12,11 +12,11 @@ namespace Chess
         {
             get
             {
-                return this.canCastle;
+                return canCastle;
             }
             set
             {
-                this.canCastle = value;
+               canCastle = value;
             }
         }
     }

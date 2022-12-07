@@ -51,10 +51,9 @@ namespace Chess
             }
             return this;
         }
-
-        /// <summary>
+        
         /// Calculate the actual actions available for a Chess Piece at a set of coordinates.
-        /// </summary>
+      
         /// <param name="x">The number of squares right of the bottom left square</param>
         /// <param name="y">The number of squares above the bottom left square</param>
         /// <param name="ignoreCheck">Do not check for threats to the king</param>
@@ -110,38 +109,7 @@ namespace Chess
                     }
                 }
             }
-
-            if (movingPeice is King && ((King)movingPeice).CanCastle)
-            {
-                int rookX = 0;
-                if (boardArray[rookX, y] is Rook && ((Rook)boardArray[rookX, y]).CanCastle)
-                {
-                    bool missedCondition = false;
-                    foreach (int rangeX in Enumerable.Range(rookX + 1, Math.Abs(rookX - x) - 1))
-                    {
-                        if (boardArray[rangeX, y] != null) missedCondition = true;
-                        // TODO: Validate that the king won't move through check
-                    }
-                    // TODO: Validate that king isn't currently in check
-                    missedCondition = missedCondition || KingInCheck(movingPeice.Player);
-                    if (!missedCondition) 
-                        AddMove(availableActions, new Point(x, y), new Point(x - 2, y), ignoreCheck);
-                }
-                rookX = COLUMNS - 1;
-                if (boardArray[rookX, y] is Rook && ((Rook)boardArray[rookX, y]).CanCastle)
-                {
-                    bool missedCondition = false;
-                    foreach (int rangeX in Enumerable.Range(x + 1, Math.Abs(rookX - x) - 1))
-                    {
-                        if (boardArray[rangeX, y] != null) missedCondition = true;
-                        // TODO: Validate that the king won't move through check
-                    }
-                    // TODO: Validate that king isn't currently in check
-                    missedCondition = missedCondition || KingInCheck(movingPeice.Player);
-                    if (!missedCondition) 
-                        AddMove(availableActions, new Point(x, y), new Point(x + 2, y), ignoreCheck);
-                }
-            }
+            
 
             if (movingPeice is Pawn)
             {
@@ -225,25 +193,13 @@ namespace Chess
             return PieceActions(position.x, position.y, ignoreCheck, attackActions, moveActions, boardArray);
         }
 
-        /// <summary>
-        /// Move a peice from one location on the board to another.
-        /// </summary>
-        /// <param name="fromX">The x coordinate of the piece that is moving.</param>
-        /// <param name="fromY">The y coordinate of the piece that is moving.</param>
-        /// <param name="toX">The x coordinate of the destination.</param>
-        /// <param name="toY">The y coordinate of the destination.</param>
-        /// <returns>Returns true on success or false on failure.</returns>
+        
+        /// Move a peice from one location on the board to another
         public bool ActionPiece(int fromX, int fromY, int toX, int toY)
         {
             return ActionPiece(new Point(fromX, fromY), new Point(toX, toY));
         }
 
-        /// <summary>
-        /// Move a peice from one location on the board to another.
-        /// </summary>
-        /// <param name="from">The location of the piece that is moving.</param>
-        /// <param name="to">The location to move to.</param>
-        /// <returns>Returns true on success or false on failure.</returns>
         public bool ActionPiece(Point from, Point to, bool bypassValidaiton = false)
         {
             if (bypassValidaiton || PieceActions(from).Contains(to))
@@ -283,26 +239,7 @@ namespace Chess
                     if (!bypassValidaiton) // Pawns can't double jump after they move.
                         pawn.CanDoubleJump = false; 
                 }
-                if (movingPeice is CastlePiece)
-                {
-                    CastlePiece rookOrKing = (CastlePiece)movingPeice;
-                    if (!bypassValidaiton) // Castling can't be done after moving
-                        rookOrKing.CanCastle = false; 
-                }
-                if (movingPeice is King)
-                {
-                    King king = (King)movingPeice;
-                    if (from.x - to.x == 2)
-                    {   // Move rook for Queenside castle
-                        boardArray[to.x + 1, from.y] = boardArray[0, from.y];
-                        boardArray[0, from.y] = null;
-                    }
-                    if (from.x - to.x == -2)
-                    {   // Move rook for Kingside castle
-                        boardArray[to.x - 1, from.y] = boardArray[COLUMNS - 1, from.y];
-                        boardArray[COLUMNS - 1, from.y] = null;
-                    }
-                }
+                
                 movingPeice.CalculateMoves();
                 boardArray[from.x, from.y] = null;
                 boardArray[to.x, to.y] = movingPeice;
@@ -311,12 +248,8 @@ namespace Chess
             return false;
         }
 
-        /// <summary>
-        /// Find out if a square is vulnerable to attacks by another player.
-        /// </summary>
-        /// <param name="player">The vulnerable player</param>
-        /// <param name="boardArray">An optional substitute board for validating moves</param>
-        /// <returns>True if square can be attacked</returns>
+        
+        // Find out if a square is vulnerable to attacks by another player.
         public bool CheckSquareVulnerable(int squareX, int squareY, int player, ChessPiece[,] boardArray = null)
         {
             if (boardArray == null)

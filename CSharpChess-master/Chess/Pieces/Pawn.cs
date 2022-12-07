@@ -10,29 +10,25 @@ namespace Chess
     {
         public Pawn()
         {
-            this.canDoubleJump = true;
+            canDoubleJump = true;
             CalculateMoves();
         }
 
         public Pawn(int player)
         {
-            base.Player = player;
-            this.canDoubleJump = true;
+            Player = player; 
+            canDoubleJump = true;
             CalculateMoves();
         }
         
-        /// <summary>
-        /// Create a new pawn.
-        /// </summary>
-        /// <param name="doubleJump">Allows the pawn to move two squares.</param>
-        /// <param name="enPassantLeft">Allows the pawn to en passant on the left.</param>
-        /// <param name="enPassantRight">Allows the pawn to en passant on the right.</param>
+        // Create a new pawn.
+       
         public Pawn(int player = 0, bool doubleJump = true, bool enPassantLeft = false, bool enPassantRight = false)
         {
-            base.Player = player;
-            this.canDoubleJump = doubleJump;
-            this.canEnPassantLeft = enPassantLeft;
-            this.canEnPassantRight = enPassantRight;
+            Player = player;
+            canDoubleJump = doubleJump;
+            canEnPassantLeft = enPassantLeft;
+            canEnPassantRight = enPassantRight;
             CalculateMoves();
         }
 
@@ -40,7 +36,7 @@ namespace Chess
         {
             Direction forward;
             DiagnalDirection forwardLeft, forwardRight;
-            if (base.Player == 1)
+            if (Player == 1)
             {
                 forward = Direction.BACKWARD;
                 forwardLeft = DiagnalDirection.BACKWARD_LEFT;
@@ -54,7 +50,7 @@ namespace Chess
             }
 
             availableMoves = new Point[1][];
-            if (this.canDoubleJump)
+            if (canDoubleJump)
             {
                 availableMoves[0] = GetMovementArray(2, forward);
             }
@@ -72,33 +68,33 @@ namespace Chess
         {
             get
             {
-                return this.canDoubleJump;
+                return canDoubleJump;
             }
             set
             {
-                this.canDoubleJump = value;
+                canDoubleJump = value;
             }
         }
         public bool CanEnPassantLeft
         {
             get
             {
-                return this.canEnPassantLeft;
+                return canEnPassantLeft;
             }
             set
             {
-                this.canEnPassantLeft = value;
+                canEnPassantLeft = value;
             }
         }
         public bool CanEnPassantRight
         {
             get
             {
-                return this.canEnPassantRight;
+                return canEnPassantRight;
             }
             set
             {
-                this.canEnPassantRight = value;
+                canEnPassantRight = value;
             }
         }
     }

@@ -75,7 +75,7 @@ namespace Chess
         }
 
     
-        // Get relative diagnal movement coordinates used by king, queen, pawn, bishop
+        // Get relative diagonal movement coordinates used by king, queen, pawn, bishop
         public static Point[] GetDiagnalMovementArray(int distance, DiagnalDirection direction)
         {
             Point[] attack = new Point[distance];

@@ -14,7 +14,7 @@ namespace Chess
         }
         public Knight(int player)
         {
-            base.Player = player;
+            Player = player;
             CalculateMoves();
         }
 

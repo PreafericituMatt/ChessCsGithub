@@ -14,7 +14,7 @@ namespace Chess
         }
         public Queen(int player)
         {
-            base.Player = player;
+            Player = player;
             CalculateMoves();
         }
 

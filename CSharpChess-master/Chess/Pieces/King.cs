@@ -10,35 +10,27 @@ namespace Chess
     {
         public King()
         {
-            this.canCastle = true;
+            canCastle = true;
             CalculateMoves();
         }
 
         public King(int player)
         {
-            base.Player = player;
-            this.canCastle = true;
+            Player = player;
+            canCastle = true;
             CalculateMoves();
         }
 
         public King(bool castle)
         {
-            this.canCastle = castle;
+            canCastle = castle;
             CalculateMoves();
         }
 
         public override ChessPiece CalculateMoves()
         {
-            if (this.canCastle && false) // Disabled
-            {
-                availableMoves = new Point[10][];
-                availableMoves[8] = new[] { new Point(2, 0) };
-                availableMoves[9] = new[] { new Point(-2, 0) };
-            }
-            else
-            {
-                availableMoves = new Point[8][];
-            }
+            availableMoves = new Point[8][];
+            
             availableMoves[0] = GetMovementArray(1, Direction.FORWARD);
             availableMoves[1] = GetMovementArray(1, Direction.BACKWARD);
             availableMoves[2] = GetMovementArray(1, Direction.LEFT);

@@ -10,20 +10,12 @@ namespace Chess
     {
         public int x;
         public int y;
-        // <param name="x">The horazontal position</param>
-        // <param name="y">The virtical position</param>
+        // x horizontal position
+        // y the vertical position
         public Point(int x, int y)
         {
             this.x = x;
             this.y = y;
-        }
-
-      
-        // Display coordinates as a string
-        //Returns coordinates in the format (x, y)
-        public override string ToString()
-        {
-            return (String.Format("({0}, {1})", x, y));
         }
     }
 

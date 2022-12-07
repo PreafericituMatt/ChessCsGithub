@@ -10,27 +10,23 @@ namespace Chess
     {
         public Rook()
         {
-            this.canCastle = true;
+            canCastle = true;
             CalculateMoves();
         }
 
-        public Rook(bool castle)
-        {
-            this.canCastle = castle;
-            CalculateMoves();
-        }
+       
 
         public Rook(bool castle, int player = 0)
         {
-            base.Player = player;
-            this.canCastle = castle;
+            Player = player;
+            canCastle = castle;
             CalculateMoves();
         }
 
         public Rook(int player)
         {
-            base.Player = player;
-            this.canCastle = true;
+            Player = player;
+            canCastle = true;
             CalculateMoves();
         }
 
